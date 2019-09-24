@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="RYR.PCFQRCodeComponent" constructor="PCFQRCode" version="1.0.0" display-name-key="QRCode" description-key="QRCode description" control-type="standard">
+  <control namespace="RYR.PCFQRCodeComponent" constructor="PCFQRCode" version="1.2.0" display-name-key="QRCode" description-key="QRCode description" control-type="standard">
     <!-- property node identifies a specific, configurable piece of data that the control expects from CDS -->
     <property name="content" display-name-key="Content" description-key="Content for generating QR Code" of-type="SingleLine.Text" usage="bound" required="false" />
     <property name="backgroundColour" display-name-key="Background Colour" description-key="Background Colour" of-type="SingleLine.Text" usage="bound" required="false" />
     <property name="foregroundColour" display-name-key="Foreground Colour" description-key="Foreground Colour" of-type="SingleLine.Text" usage="bound" required="false" />
     <property name="size" display-name-key="Size" description-key="Size" of-type="Whole.None" usage="bound" required="false" />
-    <property name="errorCorrection" display-name-key="Error correction" description-key="Error correction" of-type="Enum" usage="input" required="false">
-        <value name="L" display-name-key="L" description-key="L">L</value>
-        <value name="M" display-name-key="M" description-key="M">M</value>
-        <value name="Q" display-name-key="Q" description-key="Q">Q</value>
-        <value name="H" display-name-key="H" description-key="H">H</value>
-    </property>    
     <!-- 
       Property node's of-type attribute can be of-type-group attribute. 
       Example:

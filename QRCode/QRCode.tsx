@@ -6,7 +6,6 @@ export interface IQRProps {
   fgColor: string;
   bgColor: string;
   size: number;
-  level: "L" | "M" | "Q" | "H" | undefined;
   onContentChanged?: (content: string) => void;
 }
 
@@ -33,7 +32,6 @@ export function QRCode(props: IQRProps) {
         value={props.value}
         bgColor={props.bgColor}
         fgColor={props.fgColor}
-        level={props.level}
         size={props.size}
       ></ReactQRCode>
     );

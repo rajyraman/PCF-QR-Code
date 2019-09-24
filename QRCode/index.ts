@@ -13,8 +13,7 @@ export class PCFQRCode
     value: "",
     bgColor: "#FFFFFF",
     fgColor: "#000000",
-    size: 128,
-    level: "L"
+    size: 128
   };
   private onContentChanged(content: string) {
     this._content = content;
@@ -59,7 +58,6 @@ export class PCFQRCode
     this._props.fgColor =
       context.parameters.foregroundColour.raw || "#000000";
     this._props.size = context.parameters.size.raw || 128;
-    this._props.level = context.parameters.errorCorrection.raw || "L";
     ReactDOM.render(React.createElement(QRCode, this._props), this._container);
   }
 
