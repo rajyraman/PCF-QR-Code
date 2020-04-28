@@ -44,16 +44,14 @@ jobs:
     - name: MSBuild
       working-directory: Solution/PCFQRCode
       run: msbuild /restore /t:rebuild
-    - name: Check npm version
-      id: versioncheck
-      uses: kriasoft/check-version@v1
-      with:
-        format: "PCFQRCode_v{version}"
+    - name: Read package.json
+      uses: tyankatsu0105/read-package-version-actions@v1
+      id: package-version
     - uses: actions/upload-artifact@v2
       with:
-        name: ${{steps.versioncheck.outputs.release}}_managed.zip
+        name: ${{steps.package-version.outputs.version}}_managed.zip
         path: Solution/PCFQRCode/bin/Debug/PCFQRCode_managed.zip
     - uses: actions/upload-artifact@v2
       with:
-        name: ${{steps.versioncheck.outputs.release}}_unmanaged.zip
+        name: ${{steps.package-version.outputs.version}}_unmanaged.zip
         path: Solution/PCFQRCode/bin/Debug/PCFQRCode.zip
