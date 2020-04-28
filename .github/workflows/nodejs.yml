@@ -29,6 +29,3 @@ jobs:
     - run: npm test
     - name: setup-msbuild
     - uses: microsoft/setup-msbuild@v1
-    - name: MSBuild
-      working-directory: Solution/PCFQRCode
-      run: msbuild /restore /t:rebuild
