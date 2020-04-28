@@ -34,5 +34,9 @@ jobs:
       run: msbuild /restore /t:rebuild
     - uses: actions/upload-artifact@v2
       with:
-        name: solution-files
-        path: Solution/PCFQRCode/bin/Debug/*.zip
+        name: managed-solution
+        path: Solution/PCFQRCode/bin/Debug/PCFQRCode_managed.zip
+    - uses: actions/upload-artifact@v2
+      with:
+        name: unmanaged-solution
+        path: Solution/PCFQRCode/bin/Debug/PCFQRCode.zip
