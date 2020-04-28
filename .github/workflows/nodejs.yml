@@ -28,4 +28,4 @@ jobs:
     - run: npm run build --if-present
     - run: npm test
     - name: setup-msbuild
-    - uses: microsoft/setup-msbuild@v1
+      uses: microsoft/setup-msbuild@v1
