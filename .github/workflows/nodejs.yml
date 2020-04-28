@@ -48,7 +48,6 @@ jobs:
       id: versioncheck
       uses: kriasoft/check-version@v1
       with:
-        path: "api"
         format: "PCFQRCode_v{version}"
     - uses: actions/upload-artifact@v2
       with:
