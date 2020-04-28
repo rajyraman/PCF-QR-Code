@@ -35,4 +35,4 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: solution-files
-        path: bin\Debug\*.zip
+        path: Solution/PCFQRCode/bin/Debug/*.zip
