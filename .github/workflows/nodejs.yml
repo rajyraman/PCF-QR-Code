@@ -17,41 +17,55 @@ jobs:
     strategy:
       matrix:
         node-version: [12.x]
-
+    env:
+      solutionpath: Solution/PCFQRCode/bin/Debug/
+      solutionname: PCFQRCode
     steps:
     - uses: actions/checkout@v2
+    
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Get npm cache directory
-      id: npm-cache
-      run: |
-        echo "::set-output name=dir::$(npm config get cache)"
-    - uses: actions/cache@v1
+    
+    - name: Use Node.js
+      uses: actions/setup-node@v1
       with:
-        path: ${{ steps.npm-cache.outputs.dir }}
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        node-version: '12.x'
+    
+    - name: Cache Node.js modules
+      uses: actions/cache@v1
+      with:
+        path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
+        key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
-          ${{ runner.os }}-node-  
-      if: steps.npm-cache.outputs.cache-hit != 'true'          
-    - name: Install npm packages
+          ${{ runner.OS }}-node-
+          ${{ runner.OS }}-
+    - name: Install dependencies
       run: npm ci
+
     - run: npm run build --if-present
     - run: npm test
+    
     - name: setup-msbuild
       uses: microsoft/setup-msbuild@v1
+    
     - name: MSBuild
       working-directory: Solution/PCFQRCode
       run: msbuild /restore /t:rebuild
+    
     - name: Read package.json
       uses: tyankatsu0105/read-package-version-actions@v1
       id: package-version
-    - uses: actions/upload-artifact@v2
+    
+    - name: Managed Solution Artifact ${{steps.package-version.outputs.version}}_managed.zip
+      uses: actions/upload-artifact@v2
       with:
-        name: ${{steps.package-version.outputs.version}}_managed.zip
-        path: Solution/PCFQRCode/bin/Debug/PCFQRCode_managed.zip
-    - uses: actions/upload-artifact@v2
+        name: ${{solutionname}}${{steps.package-version.outputs.version}}_managed.zip
+        path: ${{solutionpath}}${{solutionname}}_managed.zip
+    
+    - name: Unmanaged Solution Artifact ${{steps.package-version.outputs.version}}_unmanaged.zip
+      uses: actions/upload-artifact@v2
       with:
-        name: ${{steps.package-version.outputs.version}}_unmanaged.zip
-        path: Solution/PCFQRCode/bin/Debug/PCFQRCode.zip
+        name: ${{solutionname}}_${{steps.package-version.outputs.version}}_unmanaged.zip
+        path: ${{solutionpath}}${{solutionname}}.zip
