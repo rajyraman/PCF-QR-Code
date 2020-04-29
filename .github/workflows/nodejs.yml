@@ -61,11 +61,11 @@ jobs:
     - name: Managed Solution Artifact ${{steps.package-version.outputs.version}}_managed.zip
       uses: actions/upload-artifact@v2
       with:
-        name: ${{solutionname}}${{steps.package-version.outputs.version}}_managed.zip
-        path: ${{solutionpath}}${{solutionname}}_managed.zip
+        name: ${{env.solutionname}}${{steps.package-version.outputs.version}}_managed.zip
+        path: ${{env.solutionpath}}${{env.solutionname}}_managed.zip
     
     - name: Unmanaged Solution Artifact ${{steps.package-version.outputs.version}}_unmanaged.zip
       uses: actions/upload-artifact@v2
       with:
-        name: ${{solutionname}}_${{steps.package-version.outputs.version}}_unmanaged.zip
-        path: ${{solutionpath}}${{solutionname}}.zip
+        name: ${{env.solutionname}}_${{steps.package-version.outputs.version}}_unmanaged.zip
+        path: ${{env.solutionpath}}${{env.solutionname}}.zip
